@@ -14,7 +14,9 @@
         <source src="videos/beach.mp4" type="video/mp4">
         <img src="https://i.postimg.cc/XJtfFNmb/anchor.png" alt="Background video not supported" style="width:100%;height:100%;object-fit:cover;" />
     </video>
-    <div class="video-overlay"></div>
+    <div class="video-overlay">
+        <div id="search-overlay-text"></div>
+    </div>
     <header>
         <img src="https://i.postimg.cc/XJtfFNmb/anchor.png" alt="logo" class="header-icon" />
         <h1>ANCHOR</h1>
@@ -23,7 +25,7 @@
         <form method="POST" class="search-bar" id="search-form" autocomplete="off" onsubmit="return false;">
             <div class="search-wrapper">
                 <img src="https://img.icons8.com/material-outlined/24/4285f4/search--v1.png" alt="icon" class="search-input-icon" />
-                <input type="search" id="search" name="search" placeholder="anchor..." required />
+                <input type="search" id="search" name="search" placeholder="Ask anything, e.g. 'anchor'" />
                 <button type="button" id="voice-btn" class="voice-btn" aria-label="Voice Search">
                     <img src="https://img.icons8.com/ios-filled/24/4285f4/microphone.png" alt="Voice" />
                 </button>
@@ -31,11 +33,13 @@
             <button type="submit">Search</button>
         </form>
         <ul class="autocomplete-list" id="autocomplete-list" style="display:none;"></ul>
-        <div class="results-list" id="result"></div>
+        <div id="result-overlay"></div>
     </div>
     <footer>
         &copy; 2025 <b>@Anchor</b> Melody Kelly N. All rights reserved;
-        <a href="setting.html" class="to-setting">Settings</a>
+        <a href="setting.html" class="to-setting" title="Settings">
+            <img src="https://img.icons8.com/ios-filled/28/8ab4f8/settings.png" alt="Settings" style="vertical-align:middle;"/>
+        </a>
     </footer>
     <script src="index.js"></script>
 </body>

@@ -7,6 +7,29 @@
     background: rgba(0,0,0,0.45);
     z-index: 0;
     pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#search-overlay-text {
+    display: none;
+    position: absolute;
+    top: 18vh;
+    left: 0;
+    width: 100vw;
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.45), 0 1px 0 #4285f4;
+    letter-spacing: 1.5px;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.93;
+    padding: 0 16px;
+    word-break: break-word;
+    transition: opacity 0.4s;
 }
 .container, header, footer {
     position: relative;
@@ -78,17 +101,63 @@ h2, .result-title {
     text-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 .container {
-    max-width: 600px;
-    margin: 0 auto 0 auto;
+    max-width: 700px;
+    margin: 0 auto;
     background: rgba(35, 37, 39, 0.85);
-    backdrop-filter: blur(4px); 
+    backdrop-filter: blur(4px);
     padding: 32px 24px 24px 24px;
     border-radius: 16px;
     box-shadow: 0 2px 24px rgba(0,0,0,0.18);
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    min-height: calc(100vh - 100px);
+    z-index: 2;
+    transition: background 0.4s;
 }
+
+.container.results-active {
+    max-width: 100vw;
+    width: 100vw;
+    min-height: 100vh;
+    border-radius: 0;
+    background: rgba(24,26,27,0.98);
+    box-shadow: none;
+    padding-top: 110px;
+    align-items: flex-start;
+}
+
+.video-overlay.results-blur {
+    background: rgba(0,0,0,0.7) !important;
+    backdrop-filter: blur(8px) !important;
+    transition: background 0.4s, backdrop-filter 0.4s;
+}
+
+.search-bar {
+    position: sticky;
+    top: 0;
+    background: rgba(35, 37, 39, 0.95);
+    z-index: 10;
+    width: 100%;
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+    padding-top: 18px;
+    margin-bottom: 0;
+}
+
+.results-list {
+    width: 100%;
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-height: 60vh;
+}
+
 .search-bar {
     width: 100%;
     display: flex;
@@ -203,13 +272,12 @@ button:hover {
     background: var(--btn-bg-hover);
 }
 .to-setting {
-    color: #0e71e2e5;
+    color: #073161e5;
     font-family: 'Segoe UI', Arial, sans-serif;
     font-weight: bold;
     padding: 6px 10px;
     border-radius: 8px;
     background: transparent;
-    border: 2px solid #8ab4f8;
     transition: background 0.2s;
     text-decoration: none;
     margin-left: 12px;
@@ -258,6 +326,59 @@ button:hover {
     font-size: 1rem;
     color: var(--result-snippet);
 }
+
+#result-overlay {
+    position: fixed;
+    top: 28vh;
+    left: 0;
+    width: 100vw;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+    padding: 0 16px;
+}
+#result-overlay .result-title {
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.45), 0 1px 0 #4285f4;
+    margin-bottom: 12px;
+    text-align: center;
+    letter-spacing: 1.5px;
+}
+#result-overlay .result-summary {
+    font-size: 1.18rem;
+    color: #e8eaed;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+    margin-bottom: 18px;
+    text-align: center;
+    max-width: 700px;
+}
+#result-overlay .result-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 12px;
+    object-fit: cover;
+    margin: 0 auto 18px auto;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    background: #111;
+    display: block;
+}
+@media (max-width: 700px) {
+    #result-overlay .result-title {
+        font-size: 1.2rem;
+    }
+    #result-overlay .result-summary {
+        font-size: 0.98rem;
+        max-width: 98vw;
+    }
+    #result-overlay .result-img {
+        width: 70px;
+        height: 70px;
+    }
+}
 mark {
     background: var(--highlight);
     color: var(--accent);
@@ -289,9 +410,37 @@ footer {
     h1 {
         font-size: 1.12em;
     }
+    .search-bar {
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+    .search-wrapper {
+        min-width: 0;
+    }
+    input[type=search] {
+        font-size: 0.98rem;
+        padding: 8px 8px 8px 36px;
+        border-radius: 6px;
+    }
+    .voice-btn {
+        width: 26px;
+        height: 26px;
+        right: 4px;
+    }
+    .voice-btn img {
+        width: 16px;
+        height: 16px;
+    }
+    .search-input-icon {
+        width: 16px;
+        height: 16px;
+        left: 8px;
+    }
     button {
-        font-size: 1em;
-        padding: 10px 16px;
+        font-size: 0.98em;
+        padding: 8px 12px;
+        border-radius: 6px;
+        margin-left: 8px;
     }
     .result-img {
         width: 48px;
