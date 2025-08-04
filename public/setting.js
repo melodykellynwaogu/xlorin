@@ -1,22 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const darkModeCheckbox = document.getElementById('dark-mode');
     const loginForm = document.getElementById('login-form');
     const settingsForm = document.getElementById('settings-form');
-
-
-    if (localStorage.getItem('anchor-theme') === 'dark') {
-        darkModeCheckbox.checked = true;
-    }
-
-    darkModeCheckbox.addEventListener('change', function() {
-        if (this.checked) {
-            localStorage.setItem('anchor-theme', 'dark');
-        } else {
-            localStorage.setItem('anchor-theme', 'video');
-        }
-    });
-
-
+    
     const userKey = 'anchor-user';
     let user = localStorage.getItem(userKey);
     if (!user) {

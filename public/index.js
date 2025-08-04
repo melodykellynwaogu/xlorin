@@ -19,7 +19,6 @@ function displaySkeletonLoader() {
 document.addEventListener('DOMContentLoaded', function() {
     const theme = localStorage.getItem('anchor-theme');
     const body = document.body;
-    const video = document.getElementById('bg-video');
     const overlay = document.querySelector('.video-overlay');
     if (theme === 'dark') {
         body.classList.add('dark-theme');
@@ -79,12 +78,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!query.trim()) {
             autocompleteList.style.display = 'none';
             autocompleteList.innerHTML = '';
-            resultDiv.innerHTML = "";
+            resultOverlay.innerHTML = "";
             return;
         }
 
         timeout = setTimeout(() => {
             fetch('/suggest?q=' + encodeURIComponent(query))
+            fetch('/live_search?q=' + encodeURIComponent(query))
                 .then(res => res.json())
                 .then(data => {
                     suggestions = data.suggestions || [];
@@ -148,13 +148,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 120);
     });
 
-
     input.addEventListener('change', doSearch);
     function doSearch() {
         const query = input.value;
         if (!query.trim()) return;
         document.querySelector('.container').classList.add('results-active');
-        //document.querySelector('.video-overlay').classList.add('results-blur');
+        
         const overlayElement = document.querySelector('.video-overlay');
         if (overlayElement) {
             overlayElement.classList.add('results-blur');
@@ -166,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
             overlayText.style.display = 'block';
         }
 
-        
+       
         displaySkeletonLoader();
         fetch('/live_search?q=' + encodeURIComponent(query))
         .then(res => res.json())
@@ -174,18 +173,8 @@ document.addEventListener('DOMContentLoaded', function() {
             let title = '', summary = '', img = '';
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = data.result;
-            const t = tempDiv.querySelector('.result-title');
-            const s = tempDiv.querySelector('.result-summary');
-            const i = tempDiv.querySelector('img');
-            if (t) title = t.textContent;
-            if (s) summary = s.textContent;
-            if (i) img = i.src;
-            
-            let html = '';
-            if (img) html += `<img class="result-img" src="${img}" alt="Result Image" />`;
-            if (title) html += `<div class="result-title">${title}</div>`;
-            if (summary) html += `<div class="result-summary">${summary}</div>`;
-            if (!title && !summary && !img) html = data.result;
+
+            const html = ` <div class="result-box"> ${tempDiv.innerHTML} </div>`;
             if (resultOverlay) {
                 resultOverlay.innerHTML = html;
                 resultOverlay.style.display = 'flex';

@@ -1,92 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Melonix Setting Page">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anchor Setting</title>
-    <link rel="icon" type="image/png" href="https://i.postimg.cc/XJtfFNmb/anchor.png">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="setting.css">
-    <script src="setting.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="description" content="Melonix Setting Page" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anchor Settings</title>
+  <link rel="icon" href="https://i.postimg.cc/XJtfFNmb/anchor.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="setting.js" defer></script>
 </head>
-<body>
-    <a href="index.html" class="home-icon" title="Home" style="margin-right:18px;">
-        <img src="https://img.icons8.com/ios-filled/28/8ab4f8/home.png" alt="Home" style="vertical-align:middle;"/>
-    </a>
-    <header>
-        <img src="https://i.postimg.cc/XJtfFNmb/anchor.png" alt="logo" class="header-icon" />
-        <h1>SETTINGS</h1>
-    </header>
-    <p>Welcome to Anchor search engine, Powered by wikipedia API for better and sufficient results.</p>
-        <form id="settings-form">
-            <div class="setting-item">
-                <label for="dark-mode">Dark Mode</label>
-                <input type="checkbox" id="dark-mode" name="dark-mode">
-            </div>
-            <div class="setting-item">
-                <p>We take your privacy seriously. Your data is stored securely and is only used to enhance your browsing experience.</p>
-            </div>
-            <button type="submit">Save Settings</button>
-        </form>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans px-6 py-8">
+    <div class="min-h-screen flex items-start justify-center">
+        <div class="w-full max-w-3xl">
 
-        <form id="login-form" style="display: none; margin-top: 24px;">
-            <h2>Login to Anchor</h2>
-            <p>Login to your Anchor account to access personalized features and settings.</p>
-            <div class="setting-item">
-                <label for="username" >Username: </label>
-                <input type="text" id="username" name="username" placeholder="username">
-            </div>
-            <div class="setting-item">
-                <label for="password">Password: </label>
-                <input type="password" id="password" name="password" placeholder="password">
-            </div>
-            <button type="submit">Login</button>
-        </form>
 
-        <div class="history">
-            <h2>Search History</h2>
-            <p>Enable or disable local search history tracking.</p>
-            <label><input type="checkbox" id="historyToggle"> Save History</label>
-            <ul id="history-list" class="history-list"></ul>
-            <button type="button" id="clear-history">Clear History</button>
-        </div>
+            <a href="index.html" title="Home" class="inline-flex items-center text-blue-500 mb-4 hover:underline">
+                <img src="https://img.icons8.com/ios-filled/28/8ab4f8/home.png" alt="Home" class="mr-2"  />
+                Back to Home
+            </a>
 
-        <div class="profile-customization">
-            <h2>Profile Customization</h2>
-            <form id="profile-form">
-                <div class="setting-item">
-                    <label for="display-name">Display Name</label>
-                    <input type="text" id="display-name" name="display-name" placeholder="Enter display name">
-                </div>
-                <div class="setting-item">
-                    <label for="profile-color">Profile Color</label>
-                    <input type="color" id="profile-color" name="profile-color" value="#4285f4">
-                </div>
-                <button type="submit">Save Profile</button>
+            <div class="flex justify-center mb-6">
+                <header class="flex items-center space-x-4 mb-6">
+                    <img src="https://i.postimg.cc/XJtfFNmb/anchor.png" alt="logo" class="w-10 h-10" />
+                    <h1 class="text-3xl font-bold">Settings</h1>
+                </header>
+            </div>
+            <p class="mb-6 text-sm">Welcome to Anchor search engine, powered by fast API for better and sufficient results.</p>
+
+
+            <form id="settings-form" class="space-y-4 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-8">
+                <p class="text-xs text-gray-500 dark:text-gray-400">We take your privacy seriously. Your data is stored securely and used only to enhance your experience.</p>
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save Settings</button>
             </form>
-        </div>
 
-        <div class="feedback">
-            <h2>Feedback / Report Issue</h2>
-            <form action="https://formspree.io/f/mgvkjdbr" method="POST">
-                <div class="setting-item">
-                    <textarea class="msg" id="feedback-message" name="message" rows="4" required placeholder="Type your feedback or issue here..."></textarea>
+
+            <form id="login-form" class="hidden bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-8 space-y-4">
+                <h2 class="text-xl font-semibold">Login to Anchor</h2>
+                <p class="text-sm text-gray-500">Access personalized features and settings.</p>
+                <div>
+                <label for="username" class="block text-sm mb-1">Username</label>
+                <input type="text" id="username" placeholder="username" class="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700" />
                 </div>
-                <button type="submit">Send Feedback</button>
+                <div>
+                <label for="password" class="block text-sm mb-1">Password</label>
+                <input type="password" id="password" placeholder="password" class="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700" />
+                </div>
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Login</button>
             </form>
-        </div>
 
-    <div class="about-anchor">
-        <h3>About Anchor</h3>
-        <p>Anchor is a professional browser designed to enhance your browsing experience with features like fast query processing, dark mode, user data management, and more.</p>
-        <p>Version: 1.1.0</p>
-        <p>Developed by Melody Kelly N.</p>
+
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-8">
+                <h2 class="text-lg font-semibold mb-2">Search History</h2>
+                <p class="text-sm mb-2">Enable or disable local search history tracking.</p>
+                <label class="inline-flex items-center mb-4">
+                <input type="checkbox" id="historyToggle" class="w-5 h-5 text-blue-600 rounded" />
+                <span class="ml-2 text-sm">Save History</span>
+                </label>
+                <ul id="history-list" class="text-sm list-disc list-inside mb-2"></ul>
+                <button type="button" id="clear-history" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Clear History</button>
+            </div>
+
+
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-8">
+                <h2 class="text-lg font-semibold mb-4">Profile Customization</h2>
+                <form id="profile-form" class="space-y-4">
+                <div>
+                    <label for="display-name" class="block text-sm mb-1">Display Name</label>
+                    <input type="text" id="display-name" placeholder="Enter display name" class="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700" />
+                </div>
+                <div>
+                    <label for="profile-color" class="block text-sm mb-1">Profile Color</label>
+                    <input type="color" id="profile-color" name="profile-color" value="#4285f4" class="w-12 h-8 p-0 border-none cursor-pointer" />
+                </div>
+                <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Save Profile</button>
+                </form>
+            </div>
+
+
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md mb-8">
+                <h2 class="text-lg font-semibold mb-4">Feedback / Report Issue</h2>
+                <form action="https://formspree.io/f/mgvkjdbr" method="POST" class="space-y-4">
+                <textarea name="message" required rows="4" placeholder="Type your feedback or issue here..." class="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm"></textarea>
+                <button type="submit" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">Send Feedback</button>
+                </form>
+            </div>
+
+
+            <div class="text-sm text-gray-600 dark:text-gray-400 text-center mt-6">
+                <h3 class="font-semibold text-base mb-2">About Anchor</h3>
+                <p>Anchor is a professional browser designed to enhance your browsing experience with fast query processing, dark mode, and user data management.</p>
+                <p class="mt-2">Version: 1.1.0</p>
+                <p>Developed by Melody Kelly N.</p>
+            </div>
+
+            <footer class="text-center text-xs mt-8 text-gray-400 dark:text-gray-500">
+                &copy; 2025 Melody Kelly N. All rights reserved.
+            </footer>
+
+            <script src="setting.js"></script>
+        </div>
     </div>
-
-    <footer>
-        &copy; 2025 Melody Kelly N. All rights reserved.
-
-    </footer>
 </body>
 </html>
+
+
+
+
+
+<!-- <link rel="icon" href="https://i.postimg.cc/XJtfFNmb/anchor.png" /> -->
