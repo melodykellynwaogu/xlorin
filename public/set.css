@@ -1,0 +1,34 @@
+body {
+    background-image: url(/images/sea.jpg);
+    background-size:cover;
+    background-position: center;
+    background-repeat: repeat;
+    text-align: center;
+}
+#login-form {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center;
+    align-items: center; /* Centers horizontally */
+    padding: 15%;
+    /* background-color: aliceblue; */
+}
+#login-form h2 {
+    font-weight: bold;
+    font-size: 600;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color:rgb(175, 175, 194);
+}
+#login-form p {
+    text-align: center;
+    font-weight: bold;
+}
+#login-form input {
+    box-shadow: 2px 3px 8px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+#login-form input:focus {
+    box-shadow: 2px 3px 8px rgba(0,0,0,0.3);
+    outline: none;
+}
