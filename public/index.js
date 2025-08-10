@@ -149,9 +149,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     input.addEventListener('change', doSearch);
-    function doSearch() {
+    function doSearch(type = "all") {
         const query = input.value;
         if (!query.trim()) return;
+
         document.querySelector('.container').classList.add('results-active');
         
         const overlayElement = document.querySelector('.video-overlay');
@@ -165,22 +166,29 @@ document.addEventListener('DOMContentLoaded', function() {
             overlayText.style.display = 'block';
         }
 
-       
         displaySkeletonLoader();
-        fetch('/live_search?q=' + encodeURIComponent(query))
-        .then(res => res.json())
-        .then(data => {
-            let title = '', summary = '', img = '';
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = data.result;
 
-            const html = ` <div class="result-box"> ${tempDiv.innerHTML} </div>`;
-            if (resultOverlay) {
-                resultOverlay.innerHTML = html;
-                resultOverlay.style.display = 'flex';
-            }
-        });
+        let searchUrl = `/live_search?q=${encodeURIComponent(query)}`;
+        if (type === "images") {
+            searchUrl = `/image_search?q=${encodeURIComponent(query)}`;
+        } else if (type === "videos") {
+            searchUrl = `/video_search?q=${encodeURIComponent(query)}`;
+        }
+
+        fetch(searchUrl)
+            .then(res => res.json())
+            .then(data => {
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = data.result;
+
+                const html = `<div class="result-box">${tempDiv.innerHTML}</div>`;
+                if (resultOverlay) {
+                    resultOverlay.innerHTML = html;
+                    resultOverlay.style.display = 'flex';
+                }
+            });
     }
+
 
 
     // Remove results mode if input is cleared
@@ -209,3 +217,43 @@ document.addEventListener('DOMContentLoaded', function() {
         doSearch();
     });
 });
+
+const words = [
+    "Hello User!",
+    "Welcome to Anchor search.",
+    "Find images and videos",
+    "Discover trending topics",
+    "Explore Anchor"
+];
+const typingElement = document.getElementById("typing");
+
+async function typeWord(word) {
+    for (const char of word) {
+        typingElement.textContent += char;
+        await new Promise(resolve => setTimeout(resolve, 100));
+    }
+}
+
+
+async function deleteWord() {
+    let currentText = typingElement.textContent;
+    while (currentText.length > 0) {
+        currentText = currentText.slice(0, -1); 
+        typingElement.textContent = currentText;
+        await new Promise(resolve => setTimeout(resolve, 50)); // Wait 50mgggghg
+    }
+}
+
+
+async function runTypingLoop() {
+    while (true) { 
+        for (const word of words) {
+            await typeWord(word); 
+            await new Promise(resolve => setTimeout(resolve, 1500)); // Wait 1.5 seconds after typing
+            await deleteWord(); 
+            await new Promise(resolve => setTimeout(resolve, 500)); // Wait 0.5 seconds after deleting
+        }
+    }
+}
+
+runTypingLoop();

@@ -1,89 +1,127 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const loginForm = document.getElementById('login-form');
-    const settingsForm = document.getElementById('settings-form');
-    
-    const userKey = 'anchor-user';
-    let user = localStorage.getItem(userKey);
-    if (!user) {
-        loginForm.style.display = 'flex';
+const text = "Welcome to Anchor search engine, powered by fast API for better and sufficient results.";
+const typewriterTarget = document.getElementById("text");
+let i = 0;
+function typeWriter() {
+    if (i < text.length) {
+        typewriterTarget.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 100);
+    }
+}
+typeWriter();
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Robust element lookups by id
+  const lightBtn = document.getElementById('light-btn');
+  const darkBtn = document.getElementById('dark-btn');
+  const body = document.body;
+
+  const cookieCheckbox = document.getElementById('cookie-toggle');
+  const explainBtn = document.getElementById('explain-cookies-btn');
+  const explanationContainer = document.getElementById('explanation-container');
+
+  const startupSelect = document.getElementById('startup-select');
+  const searchEngineSelect = document.getElementById('search-select');
+
+  // Helper: safe console logging of missing nodes
+  function check(name, node) {
+    if (!node) console.warn(`${name} not found in DOM`);
+  }
+  check('lightBtn', lightBtn);
+  check('darkBtn', darkBtn);
+  check('cookieCheckbox', cookieCheckbox);
+  check('explainBtn', explainBtn);
+  check('explanationContainer', explanationContainer);
+  check('startupSelect', startupSelect);
+  check('searchEngineSelect', searchEngineSelect);
+
+  // Apply theme (adds/removes class only)
+  function applyTheme(theme) {
+    if (theme === 'light') {
+      body.classList.add('light-mode');
+      body.classList.remove('dark-mode');
     } else {
-        loginForm.style.display = 'none';
+      body.classList.remove('light-mode');
+      body.classList.add('dark-mode');
     }
+  }
 
-    
-    loginForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const username = document.getElementById('username').value.trim();
-        const password = document.getElementById('password').value; 
-        if (username) {
-            localStorage.setItem(userKey, username);
-            loginForm.style.display = 'none';
-            alert('Welcome, ' + username + '!');
-        } else {
-            alert('Please enter a username.');
-        }
+  function updateThemeButtons(theme) {
+    // Visual feedback: toggle active classes if buttons exist
+    if (lightBtn && darkBtn) {
+      if (theme === 'light') {
+        lightBtn.classList.add('bg-sky-600', 'border-sky-500');
+        lightBtn.classList.remove('bg-slate-800', 'border-slate-700');
+        darkBtn.classList.add('bg-slate-800', 'border-slate-700');
+        darkBtn.classList.remove('bg-sky-600', 'border-sky-500');
+      } else {
+        darkBtn.classList.add('bg-sky-600', 'border-sky-500');
+        darkBtn.classList.remove('bg-slate-800', 'border-slate-700');
+        lightBtn.classList.add('bg-slate-800', 'border-slate-700');
+        lightBtn.classList.remove('bg-sky-600', 'border-sky-500');
+      }
+    }
+  }
+
+  // Load stored preferences
+  const storedTheme = localStorage.getItem('theme') || 'dark';
+  applyTheme(storedTheme);
+  updateThemeButtons(storedTheme);
+
+  // Cookie toggle (safe)
+  if (cookieCheckbox) {
+    const storedCookie = localStorage.getItem('blockThirdPartyCookies');
+    if (storedCookie !== null) cookieCheckbox.checked = storedCookie === 'true';
+    else {
+      cookieCheckbox.checked = true;
+      localStorage.setItem('blockThirdPartyCookies', 'true');
+    }
+    cookieCheckbox.addEventListener('change', () => {
+      localStorage.setItem('blockThirdPartyCookies', cookieCheckbox.checked.toString());
     });
+  }
 
+  // Explain button
+  if (explainBtn && explanationContainer) {
+    explainBtn.addEventListener('click', () => {
+      const explanationText =
+        "Third-party cookies are small files set by sites you don't directly visit. Blocking them limits cross-site tracking and helps protect your privacy.";
+      explanationContainer.innerHTML = `<p>${explanationText}</p>`;
+      explanationContainer.classList.remove('hidden');
+    });
+  }
 
-    if (user) {
-        const welcome = document.createElement('div');
-        welcome.textContent = 'Welcome, ' + user + '!';
-        welcome.style.cssText = 'color:#8ab4f8;font-weight:bold;text-align:center;margin-bottom:12px;';
-        settingsForm.insertBefore(welcome, settingsForm.firstChild);
-    }
+  // selects with persistence
+  if (startupSelect) {
+    const storedStartup = localStorage.getItem('startupPage');
+    if (storedStartup) startupSelect.value = storedStartup;
+    startupSelect.addEventListener('change', () => {
+      localStorage.setItem('startupPage', startupSelect.value);
+    });
+  }
 
-    const historyList = document.getElementById('history-list');
-    const clearHistoryBtn = document.getElementById('clear-history');
-    const historyToggle = document.getElementById('historyToggle');
+  if (searchEngineSelect) {
+    const storedSearch = localStorage.getItem('defaultSearchEngine');
+    if (storedSearch) searchEngineSelect.value = storedSearch;
+    searchEngineSelect.addEventListener('change', () => {
+      localStorage.setItem('defaultSearchEngine', searchEngineSelect.value);
+    });
+  }
 
-    function loadHistory() {
-        const history = JSON.parse(localStorage.getItem('searchHistory') || '[]');
-        if (!historyList) return;
-        historyList.innerHTML = '';
-        if (history.length === 0) {
-            historyList.innerHTML = '<li style="color:#888;">No search history.</li>';
-        } else {
-            history.forEach((item, idx) => {
-                const li = document.createElement('li');
-                li.textContent = item;
-                const delBtn = document.createElement('button');
-                delBtn.textContent = 'Delete';
-                delBtn.style.marginLeft = '10px';
-                delBtn.onclick = () => {
-                    history.splice(idx, 1);
-                    localStorage.setItem('searchHistory', JSON.stringify(history));
-                    loadHistory();
-                };
-                li.appendChild(delBtn);
-                historyList.appendChild(li);
-            });
-        }
-    }
-    if (historyList) loadHistory();
-    if (clearHistoryBtn) clearHistoryBtn.onclick = () => {
-        localStorage.removeItem('searchHistory');
-        loadHistory();
-    };
-    if (historyToggle) {
-        historyToggle.checked = localStorage.getItem('saveHistory') === 'true';
-        historyToggle.onchange = () => {
-            localStorage.setItem('saveHistory', historyToggle.checked);
-        };
-    }
-
-    
-    const profileForm = document.getElementById('profile-form');
-    if (profileForm) {
-        const displayName = document.getElementById('display-name');
-        const profileColor = document.getElementById('profile-color');
-
-        displayName.value = localStorage.getItem('displayName') || '';
-        profileColor.value = localStorage.getItem('profileColor') || '#4285f4';
-        profileForm.onsubmit = (e) => {
-            e.preventDefault();
-            localStorage.setItem('displayName', displayName.value);
-            localStorage.setItem('profileColor', profileColor.value);
-            alert('Profile saved!');
-        };
-    }
+  // Safe event binding for theme buttons
+  if (lightBtn) {
+    lightBtn.addEventListener('click', () => {
+      applyTheme('light');
+      updateThemeButtons('light');
+      localStorage.setItem('theme', 'light');
+    });
+  }
+  if (darkBtn) {
+    darkBtn.addEventListener('click', () => {
+      applyTheme('dark');
+      updateThemeButtons('dark');
+      localStorage.setItem('theme', 'dark');
+    });
+  }
 });
