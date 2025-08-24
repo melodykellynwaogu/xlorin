@@ -1,8 +1,9 @@
-document.querySelectorAll("button[data-target]").forEach(button => {
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll("button[data-target]").forEach(button => {
     button.addEventListener("click", () => {
       const targetId = button.getAttribute("data-target");
       const target = document.getElementById(targetId);
-      
+      if (!target) return; // safety check
       target.classList.toggle("open"); // toggle show/hide
     });
   });
@@ -11,3 +12,4 @@ document.querySelectorAll("button[data-target]").forEach(button => {
   if (window.feather) {
     feather.replace();
   }
+});
