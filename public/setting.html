@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Anchor Setting Page" />
+    <meta name="description" content="Xlorin Setting Page" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="https://i.postimg.cc/XJtfFNmb/anchor.png" />
-    <title>Settings</title>
+    <link rel="icon" href="/images/x.png" />
+    <title>Xlorin Settings</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="google-site-verification" content="mfzPqYHKAFqrAv8k_U9jFkbA5GNaW1ndLJrjgpTGdOE" />
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -27,13 +28,14 @@
         /* theme overrides (small, pragmatic) */
         .light-mode {
         background-color: #f8fafc !important;   
-        color: #0f172a !important;              
+        color: #0c0c0c !important;              
         }
         .light-mode .container {
         background-color: #ffffff !important;  
         }
         .light-mode .bg-slate-900 { background-color: #e2e8f0 !important; }
         .light-mode .bg-slate-800 { background-color: #edf2f7 !important; }
+        .light-mode .bg-slate-800 { color: #0a0a0a !important; }
         .light-mode .bg-slate-700 { background-color: #f1f5f9 !important; }
         .light-mode .text-slate-50 { color: #284c9e !important; }
     </style>
@@ -47,7 +49,7 @@
         <img src="https://img.icons8.com/ios-filled/28/8ab4f8/home.png" alt="Home" class="mr-2" />
     </a>
     <div class="container mx-auto p-4 sm:p-6 bg-slate-800 rounded-3xl shadow-xl max-w-7xl">
-        <h1 class="text-3xl sm:text-4xl font-bold text-center mb-6 text-slate-50">Anchor Browser Settings</h1>
+        <h1 class="text-3xl sm:text-4xl font-bold text-center mb-6 text-slate-50">Xlorin Browser Settings</h1>
         <p class="font-bold text-center mb-6 text-slate-50" id="text"></p>
         
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -80,7 +82,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download text-sky-400"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
                         <span class="font-medium text-slate-50">Downloads</span>
                     </a>
-                    <a href="#about" class="flex items-center space-x-3 p-3 rounded-xl hover:bg-slate-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500">
+                    <a href="../about.html" class="flex items-center space-x-3 p-3 rounded-xl hover:bg-slate-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500">
 
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info text-sky-400"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
                         <span class="font-medium text-slate-50">About</span>
@@ -166,24 +168,6 @@
                 </section>
 
            
-                <section id="search" class="bg-slate-700 p-6 rounded-2xl shadow-md">
-                    <h2 class="text-2xl font-semibold mb-4 flex items-center space-x-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search text-sky-400"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                        <span>Search Engine</span>
-                    </h2>
-                    <div class="space-y-4">
-                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 rounded-xl bg-slate-600 shadow-sm">
-                            <div>
-                                <h3 class="font-medium text-lg">Default Search Engine</h3>
-                            </div>
-                            <select id="search-select" class="mt-2 sm:mt-0 px-4 py-2 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-sky-500">
-                                <option>Anchor</option>
-                                <option>Nova</option>
-                            </select>
-                        </div>
-                    </div>
-                </section>
-
                 <section id="downloads" class="bg-slate-700 p-6 rounded-2xl shadow-md">
                     <h2 class="text-2xl font-semibold mb-4 flex items-center space-x-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download text-sky-400"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
@@ -210,21 +194,21 @@
                     </h2>
                     <div class="space-y-4">
                         <div class="p-3 rounded-xl bg-slate-600 shadow-sm">
-                            <h3 class="font-medium text-lg">Version Information</h3>
-                            <p>Anchor is a professional browser designed to enhance your browsing experience with fast query processing, and user data management.</p>
-                            <p class="text-sm text-slate-300">Your browser is up to date.</p>
+                            <h3 class="font-medium text-lg">About Xlorin</h3>
+                            <p>
+                                <img class="w-16 h-16" src="/images/x.png" alt="xlorin">
+                            </p>
+                            <p class="text-sm text-slate-300">Xlorin is up to date.</p>
                             <p class="text-xs mt-1 text-slate-400">Version 1.1.0</p>
+                            <p class="text-xs mt-1 text-slate-400"><a href="../terms.html">Terms of service</a></p>
+                            <p class="text-xs mt-1 text-slate-400"><a href="https://meg-browser.onrender.com/">Try Version 1.0.0</a></p>
                         </div>
                     </div>
-                    <form action="https://formspree.io/f/mgvkjdbr" method="POST" class="space-y-4">
-                        <textarea name="message" required rows="4" placeholder="Type your feedback or issue here..." class="w-full px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm"></textarea>
-                        <button type="submit" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">Send Feedback</button>
-                    </form>
                 </section>
 
                 <footer class="text-center text-xs mt-8 text-gray-400 dark:text-gray-500">
-                    &copy; 2025 Anchor. All rights reserved.
-                    <p>Developed by Melody Kelly N.</p>
+                        &copy; 2025 Xlorin. All rights reserved.
+                        <p>Developed by Melody Kelly N.</p>
                 </footer>
             </main>
         </div>

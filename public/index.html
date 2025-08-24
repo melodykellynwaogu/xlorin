@@ -1,40 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="google-site-verification" content="8RmEXH8LW2FWm7y1PLHv05F02LfTznl8pgahR1Dhvho" />
+    <meta name="google-site-verification" content="mfzPqYHKAFqrAv8k_U9jFkbA5GNaW1ndLJrjgpTGdOE" />
     <meta charset="utf-8">
-    <meta name="description" content="Anchor is a fast and light weight search engine, API's to provide accurate and relevant search results.">
+    <meta name="description" content="Xlorin is a fast and light weight search engine, API's to provide accurate and relevant search results.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Anchor - Lightweight Search Engine for Accurate Results</title>
-    <link rel="icon" type="image/png" href="https://i.postimg.cc/XJtfFNmb/anchor.png">
+    <title>Xlorin - Light weight Search Engine for Accurate Results</title>
+    <link rel="icon" type="image/png" href="/images/x.png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
+    <meta name="Founder" description="Founded by Melody Kelly N, and Philip">
 </head>
 <body>
     <a href="setting.html" class="setting-icon" title="Settings">
         <img src="https://img.icons8.com/ios-filled/28/8ab4f8/settings.png" alt="Settings" style="vertical-align:middle;"/>
     </a>
     <header>
-        <img src="https://i.postimg.cc/XJtfFNmb/anchor.png" alt="logo" class="header-icon" />
-        <h1>Anchor</h1>
+        <a href="dashboard.html" class="xlorin" title="Dashboard" style="margin-right: 1rem;">
+            <img class="header-icon" src="/images/x.png" alt="Xlorin">
+        </a>
+        <h1>Xlorin</h1>
         <p id="typing"></p>
     </header>
     <div class="container">
         <form method="POST" class="search-bar" id="search-form" autocomplete="off" onsubmit="return false;">
             <div class="search-wrapper">
                 <img src="https://img.icons8.com/material-outlined/24/4285f4/search--v1.png" alt="icon" class="search-input-icon" />
-                <input type="search" id="search" name="search" placeholder="search anchor.." />
+                <input type="search" id="search" name="search" placeholder="Xlorin.." />
                 <button type="button" id="voice-btn" class="voice-btn" aria-label="Voice Search">
                     <img src="https://img.icons8.com/ios-filled/24/4285f4/microphone.png" alt="Voice" />
                 </button>
             </div>
             <button type="submit">Search</button>
         </form>
+        <div class="search-type-tabs" id="search-type-tabs">
+            <button type="button" class="tab-btn active" data-type="all">All</button>
+            <button type="button" class="tab-btn" data-type="images">Images</button>
+            <button type="button" class="tab-btn" data-type="videos">Videos</button>
+            <button type="button" class="tab-btn" data-type="food">Food</button>
+        </div>
         <ul class="autocomplete-list" id="autocomplete-list" style="display:none;"></ul>
-        <div id="result-overlay" class="text-black"></div>
+        <div class="food-items" id="result-overlay" class="text-black"></div>
     </div>
     <footer>
-        &copy; 2025 Anchor All rights reserved.
+        &copy; 2025 Xlorin All rights reserved.
     </footer>
     <script src="index.js"></script>
 </body>

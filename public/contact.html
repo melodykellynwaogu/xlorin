@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/png" href="/images/x.png">
+    <title>Xlorin Contact page</title>
+    <link rel="stylesheet" href="contact.css">
+    <meta name="google-site-verification" content="mfzPqYHKAFqrAv8k_U9jFkbA5GNaW1ndLJrjgpTGdOE" />
+</head>
+<body>
+    <form class="form" id="contactForm">
+        <header>
+            <h1>Contact Us</h1>
+        </header>
+        <input class="input" type="email" name="email" required placeholder="Your email" />
+        <textarea name="message" required rows="4" placeholder="Type your feedback or issue here..."></textarea>
+        <button type="submit">Send Feedback</button>
+        <footer>
+            <p>&copy; 2025 Xlorin. All rights reserved. <a href="../index.html">Home</a></p>
+        </footer>
+    </form>
+    <script>
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const data = {
+            email: form.email.value,
+            message: form.message.value
+        };
+
+        const res = await fetch('/contact', {  // your server endpoint
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+
+        const text = await res.text();
+        alert(text);
+        form.reset();
+    });
+    </script>
+</body>
+</html>

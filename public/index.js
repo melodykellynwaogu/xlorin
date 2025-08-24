@@ -149,47 +149,61 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     input.addEventListener('change', doSearch);
+
+    // Search type tab logic
+    const searchTypeTabs = document.getElementById('search-type-tabs');
+    let currentSearchType = 'all';
+    if (searchTypeTabs) {
+        searchTypeTabs.addEventListener('click', function(e) {
+            if (e.target.classList.contains('tab-btn')) {
+                // Remove active from all
+                Array.from(searchTypeTabs.querySelectorAll('.tab-btn')).forEach(btn => btn.classList.remove('active'));
+                // Add active to clicked
+                e.target.classList.add('active');
+                currentSearchType = e.target.getAttribute('data-type');
+                doSearch(currentSearchType);
+            }
+        });
+    }
     function doSearch(type = "all") {
         const query = input.value;
         if (!query.trim()) return;
-
-        document.querySelector('.container').classList.add('results-active');
         
+        document.querySelector('.container').classList.add('results-active');
         const overlayElement = document.querySelector('.video-overlay');
         if (overlayElement) {
             overlayElement.classList.add('results-blur');
         }
-        
         const overlayText = document.getElementById('search-overlay-text');
         if (overlayText) {
             overlayText.textContent = query;
             overlayText.style.display = 'block';
         }
-
+        
         displaySkeletonLoader();
-
+        
         let searchUrl = `/live_search?q=${encodeURIComponent(query)}`;
         if (type === "images") {
             searchUrl = `/image_search?q=${encodeURIComponent(query)}`;
         } else if (type === "videos") {
             searchUrl = `/video_search?q=${encodeURIComponent(query)}`;
+        } else if (type === "food") {
+            searchUrl = `/food_search?q=${encodeURIComponent(query)}`;
         }
-
+        
         fetch(searchUrl)
-            .then(res => res.json())
-            .then(data => {
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = data.result;
-
-                const html = `<div class="result-box">${tempDiv.innerHTML}</div>`;
-                if (resultOverlay) {
-                    resultOverlay.innerHTML = html;
-                    resultOverlay.style.display = 'flex';
-                }
-            });
+        .then(res => res.json())
+        .then(data => {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = data.result;
+            
+            const html = `<div class="result-box">${tempDiv.innerHTML}</div>`;
+            if (resultOverlay) {
+                resultOverlay.innerHTML = html;
+                resultOverlay.style.display = 'flex';
+            }
+        });
     }
-
-
 
     // Remove results mode if input is cleared
     input.addEventListener('input', function() {
@@ -213,47 +227,89 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     document.getElementById('search-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        doSearch();
+    e.preventDefault();
+    doSearch(currentSearchType);
     });
 });
+//should talk more about space exploration
+// const words = [
+//     "Hello Explorer!",
+//     "Welcome to Xlorin",
+//     "Discover trending space topics",
+//     "Find images and videos from the cosmos",
+//     "Explore the universe effortlessly",
+//     "Track the latest space discoveries"
+// ];
+// const typingElement = document.getElementById("typing");
 
+// async function typeWord(word) {
+//     for (const char of word) {
+//         typingElement.textContent += char;
+//         await new Promise(resolve => setTimeout(resolve, 100));
+//     }
+// }
+
+
+// async function deleteWord() {
+//     let currentText = typingElement.textContent;
+//     while (currentText.length > 0) {
+//         currentText = currentText.slice(0, -1); 
+//         typingElement.textContent = currentText;
+//         await new Promise(resolve => setTimeout(resolve, 50)); // Wait 50mgggghg
+//     }
+// }
+
+
+// async function runTypingLoop() {
+//     while (true) { 
+//         for (const word of words) {
+//             await typeWord(word); 
+//             await new Promise(resolve => setTimeout(resolve, 1500)); // Wait 1.5 seconds after typing
+//             await deleteWord(); 
+//             await new Promise(resolve => setTimeout(resolve, 500)); // Wait 0.5 seconds after deleting
+//         }
+//     }
+// }
+
+// runTypingLoop();
 const words = [
     "Hello User!",
-    "Welcome to Anchor search.",
+    "Welcome to Xlorin search.",
     "Find images and videos",
     "Discover trending topics",
-    "Explore Anchor"
+    "Search the web effortlessly",
+    "Explore Xlorin"
 ];
+
 const typingElement = document.getElementById("typing");
 
 async function typeWord(word) {
-    for (const char of word) {
-        typingElement.textContent += char;
-        await new Promise(resolve => setTimeout(resolve, 100));
+    if (!typingElement) return; // safety check
+    for (let i = 0; i < word.length; i++) {
+        typingElement.textContent = word.substring(0, i + 1);
+        await new Promise(resolve => setTimeout(resolve, 100)); // typing speed
     }
 }
-
 
 async function deleteWord() {
-    let currentText = typingElement.textContent;
-    while (currentText.length > 0) {
-        currentText = currentText.slice(0, -1); 
-        typingElement.textContent = currentText;
-        await new Promise(resolve => setTimeout(resolve, 50)); // Wait 50mgggghg
+    if (!typingElement) return; // safety check
+    while (typingElement.textContent.length > 0) {
+        typingElement.textContent = typingElement.textContent.slice(0, -1);
+        await new Promise(resolve => setTimeout(resolve, 50)); // delete speed
     }
 }
 
-
 async function runTypingLoop() {
-    while (true) { 
+    if (!typingElement) return; // safety check
+    while (true) {
         for (const word of words) {
-            await typeWord(word); 
-            await new Promise(resolve => setTimeout(resolve, 1500)); // Wait 1.5 seconds after typing
-            await deleteWord(); 
-            await new Promise(resolve => setTimeout(resolve, 500)); // Wait 0.5 seconds after deleting
+            await typeWord(word);
+            await new Promise(resolve => setTimeout(resolve, 1500)); 
+            await deleteWord();
+            await new Promise(resolve => setTimeout(resolve, 500)); 
         }
     }
 }
 
-runTypingLoop();
+// start after DOM loads
+document.addEventListener("DOMContentLoaded", runTypingLoop);

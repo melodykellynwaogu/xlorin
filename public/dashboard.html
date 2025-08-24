@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xlorin Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="/images/x.png">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="google-site-verification" content="mfzPqYHKAFqrAv8k_U9jFkbA5GNaW1ndLJrjgpTGdOE" />
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-gray-800 shadow-md p-4 text-white">
+    <h2 class="text-2xl font-bold mb-6"><a href="index.html" title="Home">Xlorin</a></h2>
+    <nav class="space-y-4">
+      <a href="../about.html" class="block text-gray-400 hover:text-blue-600">About</a>
+      <a href="index.html" class="block text-gray-400 hover:text-blue-600">Home</a>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="flex-1 p-6">
+    <!-- Header -->
+    <header class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl font-bold">Dashboard</h1>
+      <button class="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700"><a href="https://xlorinblog.vercel.app">New Report</a></button>
+    </header>
+
+    <!-- Stats cards -->
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+      <div class="stats-card bg-gray-800 p-4 rounded-xl shadow text-white" data-key="users">
+        <h3 class="text-sm text-gray-400">Users</h3>
+        <p class="text-2xl font-bold">0</p>
+      </div>
+      <div class="stats-card bg-gray-800 p-4 rounded-xl shadow text-white" data-key="sales">
+        <h3 class="text-sm text-gray-400">Sales</h3>
+        <p class="text-2xl font-bold">$0</p>
+      </div>
+      <div class="stats-card bg-gray-800 p-4 rounded-xl shadow text-white" data-key="conversions">
+        <h3 class="text-sm text-gray-400">Conversions</h3>
+        <p class="text-2xl font-bold">0%</p>
+      </div>
+      <div class="stats-card bg-gray-800 p-4 rounded-xl shadow text-white" data-key="growth">
+        <h3 class="text-sm text-gray-400">Growth</h3>
+        <p class="text-2xl font-bold">0%</p>
+      </div>
+
+    </section>
+
+    <!-- Charts -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- Bar chart -->
+      <div  class="bg-gray-800 p-4 rounded-xl shadow text-white">
+        <h3 class="text-lg font-bold mb-4">Monthly Sales</h3>
+        <canvas id="barChart"></canvas>
+      </div>
+
+      <!-- Line chart -->
+      <div  class="bg-gray-800 p-4 rounded-xl shadow text-white">
+        <h3 class="text-lg font-bold mb-4">User Growth</h3>
+        <canvas id="lineChart"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <!-- Chart.js scripts -->
+  <script src="scripts.js"></script>
+</body>
+</html>

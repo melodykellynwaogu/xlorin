@@ -1,4 +1,4 @@
-const text = "Welcome to Anchor search engine, powered by fast API for better and sufficient results.";
+const text = "Welcome to Xlorin search engine, powered by fast API for better and sufficient results.";
 const typewriterTarget = document.getElementById("text");
 let i = 0;
 function typeWriter() {
