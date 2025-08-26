@@ -166,6 +166,7 @@ app.get('/image_search', async (req, res) => {
     `).join('')}</div>`;
     res.json({ result: html });
   } catch (e) {
+    console.error("Unsplash error:", e.response?.data || e.message);
     res.status(500).json({ result: 'Error fetching images. Please try again later.' });
   }
 });
@@ -203,7 +204,7 @@ app.get('/food_search', async (req, res) => {
   if (!query || query.length < 2) {
     return res.status(400).json({ result: 'Please enter a longer search term.' });
   }
-  const SPOONACULAR_KEY = process.env.VITE_SPOONACULAR_KEY;
+  const SPOONACULAR_KEY = process.env.SPOONACULAR_KEY;
   if (!SPOONACULAR_KEY) {
     return res.status(500).json({ result: 'Xlorin API key not configured. Please contact the site owner.' });
   }
