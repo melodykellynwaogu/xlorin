@@ -231,47 +231,6 @@ document.addEventListener('DOMContentLoaded', function() {
     doSearch(currentSearchType);
     });
 });
-//should talk more about space exploration
-// const words = [
-//     "Hello Explorer!",
-//     "Welcome to Xlorin",
-//     "Discover trending space topics",
-//     "Find images and videos from the cosmos",
-//     "Explore the universe effortlessly",
-//     "Track the latest space discoveries"
-// ];
-// const typingElement = document.getElementById("typing");
-
-// async function typeWord(word) {
-//     for (const char of word) {
-//         typingElement.textContent += char;
-//         await new Promise(resolve => setTimeout(resolve, 100));
-//     }
-// }
-
-
-// async function deleteWord() {
-//     let currentText = typingElement.textContent;
-//     while (currentText.length > 0) {
-//         currentText = currentText.slice(0, -1); 
-//         typingElement.textContent = currentText;
-//         await new Promise(resolve => setTimeout(resolve, 50)); // Wait 50mgggghg
-//     }
-// }
-
-
-// async function runTypingLoop() {
-//     while (true) { 
-//         for (const word of words) {
-//             await typeWord(word); 
-//             await new Promise(resolve => setTimeout(resolve, 1500)); // Wait 1.5 seconds after typing
-//             await deleteWord(); 
-//             await new Promise(resolve => setTimeout(resolve, 500)); // Wait 0.5 seconds after deleting
-//         }
-//     }
-// }
-
-// runTypingLoop();
 const words = [
     "Hello User!",
     "Welcome to Xlorin search.",
